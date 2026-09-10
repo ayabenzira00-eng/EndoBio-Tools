@@ -339,7 +339,7 @@
 
         async function run16s() {
             const seq = document.getElementById('seq16s').value;
-            const res = await fetch('/api/analyze-16s', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/analyze-16s', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({sequence: seq || "AGAGTTTGATCCTGGCTCAGACGAACGCTGGCGGCAGGCCTAACACATGCAAGTCGAAC"})
             });
@@ -356,7 +356,7 @@
         }
 
         async function runExtract() {
-            const res = await fetch('/api/calc-extract', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/calc-extract', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     fresh_weight: document.getElementById('freshW').value,
@@ -372,7 +372,7 @@
         }
 
         async function runPredict() {
-            const res = await fetch('/api/predict-metabolite', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/predict-metabolite', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({genus: document.getElementById('genusName').value})
             });
@@ -384,7 +384,7 @@
         }
 
         async function runPrimer() {
-            const res = await fetch('/api/check-primer', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/check-primer', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({primer: document.getElementById('primerSeq').value})
             });
@@ -396,7 +396,7 @@
         }
 
         async function runMTT() {
-            const res = await fetch('/api/calc-ic50', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/calc-ic50', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     control_abs: document.getElementById('ctrlOD').value,
@@ -411,7 +411,7 @@
         }
 
         async function runGrowth() {
-            const res = await fetch('/api/calc-growth', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/calc-growth', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     od1: document.getElementById('od1').value,
@@ -427,7 +427,7 @@
         }
 
         async function runDilution() {
-            const res = await fetch('/api/calc-dilution', {
+            const res = await fetch('https://endobio-backend.onrender.com/api/calc-dilution', {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     c1: document.getElementById('c1').value,
