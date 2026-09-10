@@ -1,14 +1,16 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import re
 import math
 import urllib.request
 import json
 
 app = Flask(__name__)
+CORS(app)  # تفعيل التواصل مع GitHub Pages بدون مشاكل CORS
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return jsonify({'status': 'online', 'message': 'EndoBio Backend Service is Running'})
 
 # 1. Tool 1: 16S rRNA Identification & BLAST
 @app.route('/api/analyze-16s', methods=['POST'])
@@ -60,9 +62,9 @@ def predict_metabolite():
         return jsonify({'error': 'يرجى إدخال اسم الجنس البكتيري'}), 400
 
     known_db = {
-        "Micrococcus": {"metabolites": ["Alkaloids", "Carotenoids", "Antimicrobial Lipids"], "activity": "Cytotoxic & Antifungal Bioactivity[cite: 1]"},
-        "Staphylococcus": {"metabolites": ["Staphyloxanthin", "Peptide Antibiotics"], "activity": "Antibacterial & Antioxidant[cite: 1]"},
-        "Microbacterium": {"metabolites": ["Vindoline precursors", "Glycan Enzymes"], "activity": "Synergistic Metabolism Support[cite: 1]"},
+        "Micrococcus": {"metabolites": ["Alkaloids", "Carotenoids", "Antimicrobial Lipids"], "activity": "Cytotoxic & Antifungal Bioactivity"},
+        "Staphylococcus": {"metabolites": ["Staphyloxanthin", "Peptide Antibiotics"], "activity": "Antibacterial & Antioxidant"},
+        "Microbacterium": {"metabolites": ["Vindoline precursors", "Glycan Enzymes"], "activity": "Synergistic Metabolism Support"},
         "Bacillus": {"metabolites": ["Surfactin", "Iturin A", "Fengycin"], "activity": "Broad-spectrum Antifungal Biocontrol"},
         "Pseudomonas": {"metabolites": ["Phenazines", "Pyoverdine"], "activity": "Phytopathogen Suppression"},
         "Streptomyces": {"metabolites": ["Streptomycin", "Actinomycin", "Polyketides"], "activity": "Potent Antibacterial & Antitumor"},
@@ -100,7 +102,7 @@ def predict_metabolite():
         'genus': genus,
         'source': 'Computational Predictive Pipeline',
         'metabolites': ["Crude Phytochemical Extracts", "Non-ribosomal Peptides"],
-        'activity': "General Bioactive & Secondary Metabolite Potential[cite: 1]"
+        'activity': "General Bioactive & Secondary Metabolite Potential"
     })
 
 # 4. Tool 4: 16S Primer Tm Checker
